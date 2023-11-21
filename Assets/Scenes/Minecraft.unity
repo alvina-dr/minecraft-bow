@@ -709,15 +709,18 @@ MonoBehaviour:
   rigibody: {fileID: 1095384269}
   blockPlayerMovement: 0
   walkingSpeed: 7
+  sneakingSpeed: 2
   cameraSpeed: 4
   jumpForce: 100
   arrowPrefab: {fileID: 1380467661035120057, guid: 4a96729b6d298d64a97e507059f29707,
     type: 3}
   arrowHolder: {fileID: 467859254}
   shootForce: 150
-  maxShootTimer: 3
+  maxShootTimer: 1
   normalFOV: 60
   focusFOV: 50
+  bow: {fileID: 807179553}
+  startingPos: {x: 0, y: 0}
 --- !u!1 &1588585612
 GameObject:
   m_ObjectHideFlags: 0

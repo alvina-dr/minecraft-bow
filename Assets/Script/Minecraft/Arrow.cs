@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private bool isShot = false;
+    private bool isFlying = false;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider col;
     [SerializeField] private PickupZone pickupCol;
@@ -12,7 +12,8 @@ public class Arrow : MonoBehaviour
     {
         if (other.GetComponent<PlayerBehavior>() != null) return;
         if (other.GetComponent<Arrow>() != null) return;
-        rb.velocity = Vector3.zero;
+        //rb.velocity = Vector3.zero;
+        isFlying = false;
         rb.isKinematic = true;
         rb.useGravity = false;
     }
@@ -24,16 +25,14 @@ public class Arrow : MonoBehaviour
         col.enabled = true;
         transform.parent = null;
         rb.AddForce(shootParameters, ForceMode.Impulse);
-        isShot = true;
+        isFlying = true;
     }
 
     private void Update()
     {
-        if (isShot)
+        if (isFlying)
         {
-            //float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.LookRotation(rb.velocity);
-            //transform.Rotate(-.normalized);
         }
     }
 }
