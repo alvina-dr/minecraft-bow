@@ -23,7 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private Transform arrowHolder;
     [SerializeField] private float shootForce;
     private float shootTimer;
-    private float minShootTimer = .2f;
+    private float minShootTimer = .01f;
     [SerializeField] private float maxShootTimer;
     [SerializeField] private float normalFOV;
     [SerializeField] private float focusFOV;
