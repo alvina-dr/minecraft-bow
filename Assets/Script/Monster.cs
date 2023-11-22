@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
 {
 
     [Header("STATS")]
+    public MonsterData data;
     private float currentHealth;
 
     [SerializeField] private Animator animator;
@@ -15,18 +16,29 @@ public class Monster : MonoBehaviour
     [Header("MOVEMENT SYSTEM")]
     [SerializeField] private NavMeshAgent agent;
 
+    private float attackTimer;
+
+    private void Start()
+    {
+        currentHealth = data.maxHealth;
+        agent.speed = data.moveSpeed;
+    }
+
     private void Update()
     {
         agent.destination = GPCtrl.Instance.player.transform.position;
-        if (Vector3.Distance(agent.destination, transform.position) <= 2)
+        if (Vector3.Distance(agent.destination, transform.position) <= data.attackRange)
         {
-            Attack();
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= data.attackReload) Attack();
         }
     }
 
-    public void Attack()
+    private void Attack()
     {
         animator.SetBool("IsAttacking", true);
+        attackTimer = 0;
+        GPCtrl.Instance.player.Damage(data.damage);
     }
 
     public void Damage(float _damage)
