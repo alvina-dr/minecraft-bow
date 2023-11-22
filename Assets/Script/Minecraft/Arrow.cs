@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
 {
     private bool isFlying = false;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject mesh;
     [SerializeField] private Collider col;
     [SerializeField] private PickupZone pickupCol;
     private void OnTriggerEnter(Collider other)
@@ -16,6 +17,7 @@ public class Arrow : MonoBehaviour
         isFlying = false;
         rb.isKinematic = true;
         rb.useGravity = false;
+        pickupCol.gameObject.SetActive(true);
     }
 
     public void ShootArrow(Vector3 shootParameters)
@@ -26,6 +28,7 @@ public class Arrow : MonoBehaviour
         transform.parent = null;
         rb.AddForce(shootParameters, ForceMode.Impulse);
         isFlying = true;
+        mesh.SetActive(true);
     }
 
     private void Update()

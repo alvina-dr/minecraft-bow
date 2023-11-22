@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3239627334058759378}
   - component: {fileID: 1063847881785237568}
   - component: {fileID: 7011020942876863695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PickupZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,11 +48,11 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7011020942876863695
 MonoBehaviour:
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb87eb52bd3211744a71ba894d4bab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 27b280487fe1b7e40a3058898d1fa682, type: 2}
 --- !u!1 &4203744276207342693
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,7 +78,7 @@ GameObject:
   - component: {fileID: 1139231523187164606}
   - component: {fileID: 6863427624949920817}
   - component: {fileID: 7164132938568841045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PickupZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb87eb52bd3211744a71ba894d4bab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
 --- !u!1001 &7253758512139920957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,6 +217,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arrow
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73704775d65084442859271361537867,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73704775d65084442859271361537867,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -227,6 +239,12 @@ PrefabInstance:
 --- !u!4 &7142778906182779350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73704775d65084442859271361537867,
+    type: 3}
+  m_PrefabInstance: {fileID: 7253758512139920957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7524370654949137260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 73704775d65084442859271361537867,
     type: 3}
   m_PrefabInstance: {fileID: 7253758512139920957}
   m_PrefabAsset: {fileID: 0}
@@ -318,6 +336,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arrow
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73704775d65084442859271361537867,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -368,14 +391,14 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &7192931972964710231
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -398,7 +421,7 @@ CapsuleCollider:
   m_Radius: 0.14
   m_Height: 0.91
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!114 &1380467661035120057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,8 +435,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1391856569281364568}
+  mesh: {fileID: 7524370654949137260}
   col: {fileID: 7192931972964710231}
-  pickupCol: {fileID: 0}
+  pickupCol: {fileID: 7011020942876863695}
 --- !u!4 &8695860416482991635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73704775d65084442859271361537867,

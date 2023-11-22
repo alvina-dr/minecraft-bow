@@ -29,6 +29,12 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float focusFOV;
     [SerializeField] private Transform bow;
     [SerializeField] private Vector2 startingPos;
+    [SerializeField] private List<GameObject> bowModels;
+    private int bowModelNum = 0;
+    [SerializeField] private ItemData arrowData;
+
+    [Header("INVENTORY")]
+    public Inventory inventory;
     #endregion
 
     private void Start()
@@ -39,6 +45,7 @@ public class PlayerBehavior : MonoBehaviour
         shootTimer = minShootTimer;
         startingPos.x = bow.localPosition.x;
         startingPos.y = bow.localPosition.y;
+        GPCtrl.Instance.UICtrl.inventoryBar.UpdateInventory(inventory);
     }
 
     private void Update()
@@ -48,21 +55,18 @@ public class PlayerBehavior : MonoBehaviour
             moveDirection = Vector3.zero;
             return;
         }
-        if (Input.GetMouseButtonDown(0))
-        {
-            LoadArrow();
-        }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && inventory.SearchItem(arrowData))
         {
             ShootArrow();
         }
-        if (Input.GetMouseButton(0) && loadedArrow != null)
+        if (Input.GetMouseButton(0) && inventory.SearchItem(arrowData))
         {
             currentSpeed = sneakingSpeed;
             if (shootTimer < maxShootTimer)
             {
                 shootTimer += Time.deltaTime;
                 Camera.main.fieldOfView = Mathf.Lerp(normalFOV, focusFOV, shootTimer / maxShootTimer);
+                ChangeBowModel(Mathf.RoundToInt(shootTimer / maxShootTimer * bowModels.Count));
             }
             if (shootTimer >= maxShootTimer)
             {
@@ -92,19 +96,26 @@ public class PlayerBehavior : MonoBehaviour
         rigibody.velocity = transform.forward * moveDirection.z * currentSpeed + transform.right * moveDirection.x * currentSpeed;
     }
 
-    private void LoadArrow()
-    {
-        loadedArrow = Instantiate(arrowPrefab, arrowHolder);
-    }
-
     private void ShootArrow()
     {
-        if (loadedArrow != null)
+        loadedArrow = Instantiate(arrowPrefab, arrowHolder);
+        loadedArrow.ShootArrow(Camera.main.transform.forward * shootTimer / maxShootTimer * shootForce);
+        shootTimer = minShootTimer;
+        Camera.main.DOFieldOfView(normalFOV, .3f);
+        bow.DOLocalMove(new Vector3(startingPos.x, startingPos.y, bow.localPosition.z), .3f);
+        ChangeBowModel(0);
+        inventory.RemoveItem(arrowData, 1);
+    }
+
+    private void ChangeBowModel(int _num)
+    {
+        for (int i = 0; i < bowModels.Count; i++)
         {
-            loadedArrow.ShootArrow(Camera.main.transform.forward * shootTimer / maxShootTimer * shootForce);
-            shootTimer = minShootTimer;
-            Camera.main.DOFieldOfView(normalFOV, .3f);
-            bow.DOLocalMove(new Vector3(startingPos.x, startingPos.y, bow.localPosition.z), .3f);
+            bowModels[i].gameObject.SetActive(false);
+            if (i == _num)
+                bowModels[i].gameObject.SetActive(true);
+            if (_num == bowModels.Count)
+                bowModels[bowModels.Count-1].gameObject.SetActive(true);
         }
     }
 }

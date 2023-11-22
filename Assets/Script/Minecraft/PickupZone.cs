@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PickupZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ItemData data;
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PlayerBehavior _player = other.GetComponent<PlayerBehavior>();
+        if (_player != null)
+        {
+            _player.inventory.AddItem(data, 1);
+            Destroy(transform.parent.gameObject);
+        }
     }
 }
