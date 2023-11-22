@@ -41,6 +41,10 @@ public class Monster : MonoBehaviour
     public void Death()
     {
         animator.SetTrigger("Death");
-        DOVirtual.DelayedCall(1.5f, () => Destroy(this.gameObject));
+        DOVirtual.DelayedCall(1.5f, () =>
+        {
+            GPCtrl.Instance.UICtrl.deathCounter.Increment();
+            Destroy(this.gameObject);
+        });
     }
 }
