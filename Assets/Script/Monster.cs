@@ -18,9 +18,18 @@ public class Monster : MonoBehaviour
     private void Update()
     {
         agent.destination = GPCtrl.Instance.player.transform.position;
+        if (Vector3.Distance(agent.destination, transform.position) <= 2)
+        {
+            Attack();
+        }
     }
 
-    public void InflictDamage(float _damage)
+    public void Attack()
+    {
+        animator.SetBool("IsAttacking", true);
+    }
+
+    public void Damage(float _damage)
     {
         currentHealth -= _damage;
         if (currentHealth <= 0)

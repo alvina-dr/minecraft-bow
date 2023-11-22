@@ -11,6 +11,10 @@ public class PlayerBehavior : MonoBehaviour
     [HideInInspector] public bool blockPlayerMovement;
     private float currentSpeed;
 
+    [Header("STATS")]
+    private float currentHealth;
+    private float maxHealth = 10;
+
     [Header("MOVEMENT SYSTEM")]
     public float walkingSpeed;
     public float sneakingSpeed;
@@ -28,7 +32,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float normalFOV;
     [SerializeField] private float focusFOV;
     [SerializeField] private Transform bow;
-    [SerializeField] private Vector2 startingPos;
+    private Vector2 startingPos;
     [SerializeField] private List<GameObject> bowModels;
     private int bowModelNum = 0;
     [SerializeField] private ItemData arrowData;
@@ -46,6 +50,7 @@ public class PlayerBehavior : MonoBehaviour
         startingPos.x = bow.localPosition.x;
         startingPos.y = bow.localPosition.y;
         GPCtrl.Instance.UICtrl.inventoryBar.UpdateInventory(inventory);
+        currentHealth = maxHealth;
     }
 
     private void Update()
@@ -89,6 +94,11 @@ public class PlayerBehavior : MonoBehaviour
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * cameraSpeed);
         Camera.main.transform.Rotate(Vector3.right * -Input.GetAxis("Mouse Y") * cameraSpeed);
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Damage(.5f);
+        }
     }
 
     private void FixedUpdate()
@@ -117,5 +127,20 @@ public class PlayerBehavior : MonoBehaviour
             if (_num == bowModels.Count)
                 bowModels[bowModels.Count-1].gameObject.SetActive(true);
         }
+    }
+
+    public void Damage(float _damage)
+    {
+        currentHealth -= _damage;
+        GPCtrl.Instance.UICtrl.healthBar.SetBarValue(currentHealth, maxHealth);
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        Debug.Log("DEAD");
     }
 }
