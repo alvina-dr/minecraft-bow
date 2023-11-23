@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     [Header("COMPONENTS")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] Rigidbody rigibody;
+    [SerializeField] List<Renderer> meshList = new List<Renderer>();
 
     [Header("STATS")]
     public MonsterData data;
@@ -49,6 +50,7 @@ public class Monster : MonoBehaviour
     {
         currentHealth -= _damage;
         rigibody.AddForce(_pushDirection * pushForce, ForceMode.Impulse);
+        Blink();
         audioSource.Play();
         if (currentHealth <= 0)
         {
@@ -65,5 +67,27 @@ public class Monster : MonoBehaviour
             GPCtrl.Instance.UICtrl.deathCounter.Increment();
             Destroy(this.gameObject);
         });
+    }
+
+    public void Blink()
+    {
+        for (int i = 0; i < meshList.Count; i++)
+        {
+            for (int j = 0; j < meshList[i].materials.Length; j++)
+            {
+                meshList[i].materials[j].color = Color.red;
+            }
+        }
+        DOVirtual.DelayedCall(.2f, () => 
+        {
+            for (int i = 0; i < meshList.Count; i++)
+            {
+                for (int j = 0; j < meshList[i].materials.Length; j++)
+                {
+                    meshList[i].materials[j].color = Color.white;
+                }
+            }
+        });
+
     }
 }
