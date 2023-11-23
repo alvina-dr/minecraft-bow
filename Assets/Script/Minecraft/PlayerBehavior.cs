@@ -20,6 +20,7 @@ public class PlayerBehavior : MonoBehaviour
     public float sneakingSpeed;
     public float cameraSpeed;
     public float jumpForce;
+    public bool jump = false;
 
     [Header("SHOOTING SYSTEM")]
     public Arrow arrowPrefab;
@@ -88,9 +89,14 @@ public class PlayerBehavior : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigibody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Acceleration);
+            rigibody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+            //jump = true;
+        } else
+        {
+            jump = false;
         }
-        moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * cameraSpeed);
         Camera.main.transform.Rotate(Vector3.right * -Input.GetAxis("Mouse Y") * cameraSpeed);
 
@@ -102,7 +108,12 @@ public class PlayerBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigibody.velocity = transform.forward * moveDirection.z * currentSpeed + transform.right * moveDirection.x * currentSpeed;
+        Vector3 movement = transform.forward * moveDirection.z * currentSpeed + transform.right * moveDirection.x * currentSpeed;
+        rigibody.velocity = new Vector3(movement.x, rigibody.velocity.y, movement.z);
+        if (jump)
+        {
+
+        }
     }
 
     private void ShootArrow()

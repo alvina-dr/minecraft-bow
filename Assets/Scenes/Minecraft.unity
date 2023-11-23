@@ -2859,7 +2859,7 @@ Rigidbody:
   m_GameObject: {fileID: 1095384264}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -2874,9 +2874,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1095384270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2894,7 +2894,8 @@ MonoBehaviour:
   walkingSpeed: 5
   sneakingSpeed: 1.5
   cameraSpeed: 4
-  jumpForce: 1
+  jumpForce: 10
+  jump: 0
   arrowPrefab: {fileID: 1380467661035120057, guid: 4a96729b6d298d64a97e507059f29707,
     type: 3}
   arrowHolder: {fileID: 467859254}
