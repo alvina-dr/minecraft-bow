@@ -34,7 +34,6 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private Transform bow;
     private Vector2 startingPos;
     [SerializeField] private List<GameObject> bowModels;
-    private int bowModelNum = 0;
     [SerializeField] private ItemData arrowData;
 
     [Header("INVENTORY")]
@@ -55,7 +54,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (blockPlayerMovement)
+        if (GPCtrl.Instance.pause)
         {
             moveDirection = Vector3.zero;
             return;
@@ -84,12 +83,12 @@ public class PlayerBehavior : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.visible = !Cursor.visible;
-            Cursor.lockState = CursorLockMode.None;
+            GPCtrl.Instance.Pause();
+
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigibody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            rigibody.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Acceleration);
         }
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * cameraSpeed);
