@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39c8a02264b31a74497480ceca340569, type: 3}
-  m_Name: Zombie
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile
   m_EditorClassIdentifier: 
-  attackRange: 2
-  moveSpeed: 1
-  maxHealth: 10
-  damage: 1
-  attackReload: 1.5
-  killPoints: 100
+  components: []

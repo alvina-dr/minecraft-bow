@@ -12,6 +12,9 @@ public class Spawner : MonoBehaviour
     public List<Monster> monsterList = new List<Monster>();
     public List<Transform> spawnerPoints = new List<Transform>();
 
+    [Header("UPGRADE")]
+    [SerializeField] private ItemData arrowData;
+
     [Header("PAUSE")]
     private float pauseTimer;
     [SerializeField] private float pauseDuration;
@@ -39,6 +42,7 @@ public class Spawner : MonoBehaviour
     {
         wavePause = true;
         zombieNumber = Mathf.RoundToInt(zombieNumber * waveDifficultyMultiplier);
+        GPCtrl.Instance.player.inventory.AddItem(arrowData, waveNumber * 15);
     }
 
     public void NextWave()

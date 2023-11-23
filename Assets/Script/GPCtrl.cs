@@ -20,6 +20,11 @@ public class GPCtrl : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        UICtrl.deathCounter.Increment(0);
+    }
+
     public void Pause()
     {
         if (pause) //UNPAUSE

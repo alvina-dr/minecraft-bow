@@ -70,7 +70,7 @@ public class Monster : MonoBehaviour
         animator.SetTrigger("Death");
         DOVirtual.DelayedCall(1.5f, () =>
         {
-            GPCtrl.Instance.UICtrl.deathCounter.Increment();
+            GPCtrl.Instance.UICtrl.deathCounter.Increment(data.killPoints);
             Destroy(this.gameObject);
         });
     }

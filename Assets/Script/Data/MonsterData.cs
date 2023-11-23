@@ -10,4 +10,5 @@ public class MonsterData : ScriptableObject
     public float maxHealth;
     public float damage;
     public float attackReload;
+    public int killPoints;
 }
