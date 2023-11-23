@@ -23,6 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     public bool jump = false;
 
     [Header("SHOOTING SYSTEM")]
+    [SerializeField] private AudioSource shootAudioSource;
     public Arrow arrowPrefab;
     private Arrow loadedArrow;
     [SerializeField] private Transform arrowHolder;
@@ -46,7 +47,7 @@ public class PlayerBehavior : MonoBehaviour
         currentSpeed = walkingSpeed;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        shootTimer = minShootTimer;
+        shootTimer = 0;
         startingPos.x = bow.localPosition.x;
         startingPos.y = bow.localPosition.y;
         GPCtrl.Instance.UICtrl.inventoryBar.UpdateInventory(inventory);
@@ -62,7 +63,8 @@ public class PlayerBehavior : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0) && inventory.SearchItem(arrowData))
         {
-            ShootArrow();
+            if (shootTimer >= minShootTimer) ShootArrow();
+            else shootTimer = 0;
         }
         if (Input.GetMouseButton(0) && inventory.SearchItem(arrowData))
         {
@@ -118,9 +120,10 @@ public class PlayerBehavior : MonoBehaviour
 
     private void ShootArrow()
     {
+        shootAudioSource.Play();
         loadedArrow = Instantiate(arrowPrefab, arrowHolder);
         loadedArrow.ShootArrow(Camera.main.transform.forward * shootTimer / maxShootTimer * shootForce);
-        shootTimer = minShootTimer;
+        shootTimer = 0;
         Camera.main.DOFieldOfView(normalFOV, .3f);
         bow.DOLocalMove(new Vector3(startingPos.x, startingPos.y, bow.localPosition.z), .3f);
         ChangeBowModel(0);

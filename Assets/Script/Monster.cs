@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class Monster : MonoBehaviour
 {
+    [Header("COMPONENTS")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] Rigidbody rigibody;
 
     [Header("STATS")]
     public MonsterData data;
@@ -15,6 +18,7 @@ public class Monster : MonoBehaviour
 
     [Header("MOVEMENT SYSTEM")]
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private float pushForce;
 
     private float attackTimer;
 
@@ -41,9 +45,11 @@ public class Monster : MonoBehaviour
         GPCtrl.Instance.player.Damage(data.damage);
     }
 
-    public void Damage(float _damage)
+    public void Damage(float _damage, Vector3 _pushDirection)
     {
         currentHealth -= _damage;
+        rigibody.AddForce(_pushDirection * pushForce, ForceMode.Impulse);
+        audioSource.Play();
         if (currentHealth <= 0)
         {
             Death();
@@ -52,6 +58,7 @@ public class Monster : MonoBehaviour
 
     public void Death()
     {
+        GetComponent<Collider>().enabled = false;
         animator.SetTrigger("Death");
         DOVirtual.DelayedCall(1.5f, () =>
         {

@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
         Monster _monster = other.GetComponent<Monster>();
         if (_monster != null)
         {
-            _monster.Damage(5.0f);
+            _monster.Damage(5.0f, rb.velocity);
             Destroy(this.gameObject);
         } else
         {
