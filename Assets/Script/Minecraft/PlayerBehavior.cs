@@ -16,6 +16,7 @@ public class PlayerBehavior : MonoBehaviour
     private float maxHealth = 10;
 
     [Header("MOVEMENT SYSTEM")]
+    public float runningSpeed;
     public float walkingSpeed;
     public float sneakingSpeed;
     public float cameraSpeed;
@@ -85,7 +86,8 @@ public class PlayerBehavior : MonoBehaviour
             }
         } else
         {
-            currentSpeed = walkingSpeed;
+            if (Input.GetKey(KeyCode.LeftShift)) currentSpeed = runningSpeed;
+            else currentSpeed = walkingSpeed;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -96,14 +98,11 @@ public class PlayerBehavior : MonoBehaviour
         {
             jump = false;
         }
-            moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * cameraSpeed);
         Camera.main.transform.Rotate(Vector3.right * -Input.GetAxis("Mouse Y") * cameraSpeed);
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Damage(.5f);
-        }
+
     }
 
     private void FixedUpdate()

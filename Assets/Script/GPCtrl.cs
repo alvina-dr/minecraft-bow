@@ -32,12 +32,14 @@ public class GPCtrl : MonoBehaviour
             pause = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            UICtrl.pauseMenu.gameObject.SetActive(false);
         }
         else //PAUSE
         {
             pause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            UICtrl.pauseMenu.gameObject.SetActive(true);
         }
 
     }

@@ -8,4 +8,5 @@ public class UICtrl : MonoBehaviour
     public UI_HealthBar healthBar;
     public UI_Counter deathCounter;
     public UI_Counter chronoWavePause;
+    public UI_PauseMenu pauseMenu;
 }

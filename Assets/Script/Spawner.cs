@@ -42,11 +42,11 @@ public class Spawner : MonoBehaviour
     {
         wavePause = true;
         zombieNumber = Mathf.RoundToInt(zombieNumber * waveDifficultyMultiplier);
-        GPCtrl.Instance.player.inventory.AddItem(arrowData, waveNumber * 15);
     }
 
     public void NextWave()
     {
+        GPCtrl.Instance.player.inventory.AddItem(arrowData, waveNumber * 15);
         pauseTimer = 0;
         waveNumber++;
         for (int i = 0; i < waveNumber * zombieNumber; i++)

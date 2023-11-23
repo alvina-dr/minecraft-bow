@@ -36,6 +36,9 @@ public class Monster : MonoBehaviour
         {
             attackTimer += Time.deltaTime;
             if (attackTimer >= data.attackReload) Attack();
+        } else
+        {
+            animator.SetBool("IsAttacking", false);
         }
     }
 
