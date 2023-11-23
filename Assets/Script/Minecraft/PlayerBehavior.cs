@@ -56,6 +56,10 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GPCtrl.Instance.Pause();
+        }
         if (GPCtrl.Instance.pause)
         {
             moveDirection = Vector3.zero;
@@ -82,12 +86,6 @@ public class PlayerBehavior : MonoBehaviour
         } else
         {
             currentSpeed = walkingSpeed;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GPCtrl.Instance.Pause();
-
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

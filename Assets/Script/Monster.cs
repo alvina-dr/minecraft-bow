@@ -31,7 +31,7 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        agent.destination = GPCtrl.Instance.player.transform.position;
+        if (agent.enabled) agent.destination = GPCtrl.Instance.player.transform.position;
         if (Vector3.Distance(agent.destination, transform.position) <= data.attackRange)
         {
             attackTimer += Time.deltaTime;
@@ -49,13 +49,19 @@ public class Monster : MonoBehaviour
     public void Damage(float _damage, Vector3 _pushDirection)
     {
         currentHealth -= _damage;
-        rigibody.AddForce(_pushDirection * pushForce, ForceMode.Impulse);
         Blink();
         audioSource.Play();
-        if (currentHealth <= 0)
+        rigibody.AddForce(new Vector3(_pushDirection.x, 0, _pushDirection.z).normalized * pushForce, ForceMode.Impulse);
+        rigibody.AddForce(transform.up * 10, ForceMode.Impulse);
+        transform.GetChild(0).DOLocalJump(Vector3.zero, .5f, 1, .5f);
+        DOVirtual.DelayedCall(.2f, () =>
         {
-            Death();
-        }
+            if (currentHealth <= 0)
+            {
+                Death();
+            }
+        });
+
     }
 
     public void Death()

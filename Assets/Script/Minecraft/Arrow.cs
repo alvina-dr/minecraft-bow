@@ -13,9 +13,6 @@ public class Arrow : MonoBehaviour
     {
         if (other.GetComponent<PlayerBehavior>() != null) return;
         if (other.GetComponent<Arrow>() != null) return;
-        isFlying = false;
-        rb.isKinematic = true;
-        rb.useGravity = false;
         Monster _monster = other.GetComponent<Monster>();
         if (_monster != null)
         {
@@ -25,6 +22,9 @@ public class Arrow : MonoBehaviour
         {
             pickupCol.gameObject.SetActive(true);
         }
+        isFlying = false;
+        rb.isKinematic = true;
+        rb.useGravity = false;
     }
 
     public void ShootArrow(Vector3 shootParameters)
