@@ -24,7 +24,11 @@ public class Spawner : MonoBehaviour
             WaitNextWave();
         }
 
-        if (wavePause) pauseTimer += Time.deltaTime;
+        if (wavePause)
+        {
+            pauseTimer += Time.deltaTime;
+            GPCtrl.Instance.UICtrl.chronoWavePause.SetText(Mathf.RoundToInt(pauseDuration - pauseTimer).ToString());
+        }
         if (pauseTimer >= pauseDuration)
         {
             NextWave();
@@ -46,6 +50,7 @@ public class Spawner : MonoBehaviour
             SpawnMonster(monsterList[Random.Range(0, monsterList.Count)]);
         }
         wavePause = false;
+        GPCtrl.Instance.UICtrl.chronoWavePause.SetText("");
     }
 
     public void SpawnMonster(Monster _monster)

@@ -9,10 +9,10 @@ public class UI_Counter : MonoBehaviour
 
     private void Start()
     {
-        SetCount(count.ToString());
+        SetText(count.ToString());
     }
 
-    public void SetCount(string _text)
+    public void SetText(string _text)
     {
         text.text = _text;
     }
@@ -20,6 +20,6 @@ public class UI_Counter : MonoBehaviour
     public void Increment()
     {
         count++;
-        SetCount(count.ToString());
+        SetText(count.ToString());
     }
 }
