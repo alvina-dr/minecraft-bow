@@ -18,3 +18,5 @@ MonoBehaviour:
   damage: 1
   attackReload: 1.5
   killPoints: 100
+  dropList:
+  - {fileID: 11400000, guid: 27b280487fe1b7e40a3058898d1fa682, type: 2}

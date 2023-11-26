@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 0a5eed459323a1d4297620c51bc46f64, type: 3}
   maxStack: 64
+  lootPrefab: {fileID: 2397308869125246590, guid: 5de8a71499a1b7e4793de884ff49b318,
+    type: 3}

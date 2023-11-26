@@ -73,6 +73,9 @@ public class Monster : MonoBehaviour
         animator.SetTrigger("Death");
         DOVirtual.DelayedCall(1.5f, () =>
         {
+            Drop _drop = Instantiate(GPCtrl.Instance.dropPrefab);
+            _drop.transform.position = transform.position;
+            _drop.SetupDrop(data.dropList[Random.Range(0, data.dropList.Count)], 1);
             GPCtrl.Instance.UICtrl.deathCounter.Increment(data.killPoints);
             Destroy(this.gameObject);
         });

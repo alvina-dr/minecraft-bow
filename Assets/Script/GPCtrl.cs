@@ -5,9 +5,12 @@ using UnityEngine;
 public class GPCtrl : MonoBehaviour
 {
     public static GPCtrl Instance;
+    [Header("REFERENCES")]
     public UICtrl UICtrl;
     public PlayerBehavior player;
-    public bool pause = false;
+    [Header("PREFABS")]
+    public Drop dropPrefab;
+    [HideInInspector] public bool pause = false;
 
     private void Awake()
     {
@@ -41,6 +44,10 @@ public class GPCtrl : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             UICtrl.pauseMenu.gameObject.SetActive(true);
         }
+    }
 
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

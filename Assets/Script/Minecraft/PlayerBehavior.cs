@@ -7,7 +7,6 @@ public class PlayerBehavior : MonoBehaviour
 {
     #region Variables
     public Rigidbody rigibody;
-    private Vector3 moveDirection;
     [HideInInspector] public bool blockPlayerMovement;
     private float currentSpeed;
 
@@ -22,6 +21,9 @@ public class PlayerBehavior : MonoBehaviour
     public float cameraSpeed;
     public float jumpForce;
     public bool jump = false;
+    private Vector3 moveDirection;
+    private float yaw;
+    public float sens;
 
     [Header("SHOOTING SYSTEM")]
     [SerializeField] private AudioSource shootAudioSource;
@@ -92,27 +94,27 @@ public class PlayerBehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rigibody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-            //jump = true;
         } else
         {
             jump = false;
         }
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * cameraSpeed);
+        
         Camera.main.transform.Rotate(Vector3.right * -Input.GetAxis("Mouse Y") * cameraSpeed);
+        //yaw = (yaw + Input.GetAxis("Mouse X") * sens) % 360f;
+    }
 
-
+    private void LateUpdate()
+    {
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
     private void FixedUpdate()
     {
+        //rigibody.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
         Vector3 movement = transform.forward * moveDirection.z * currentSpeed + transform.right * moveDirection.x * currentSpeed;
         rigibody.velocity = new Vector3(movement.x, rigibody.velocity.y, movement.z);
-        if (jump)
-        {
-
-        }
+        //rigibody.MoveRotation()
     }
 
     private void ShootArrow()

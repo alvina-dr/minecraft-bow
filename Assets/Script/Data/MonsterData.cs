@@ -11,4 +11,5 @@ public class MonsterData : ScriptableObject
     public float damage;
     public float attackReload;
     public int killPoints;
+    public List<ItemData> dropList = new List<ItemData>();
 }
