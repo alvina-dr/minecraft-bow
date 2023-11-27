@@ -26,7 +26,6 @@ public class PlayerBehavior : MonoBehaviour
     public float sens;
 
     [Header("SHOOTING SYSTEM")]
-    [SerializeField] private AudioSource shootAudioSource;
     public Arrow arrowPrefab;
     private Arrow loadedArrow;
     [SerializeField] private Transform arrowHolder;
@@ -43,6 +42,10 @@ public class PlayerBehavior : MonoBehaviour
 
     [Header("INVENTORY")]
     public Inventory inventory;
+
+    [Header("AUDIO COMPONENTS")]
+    [SerializeField] private AudioSource shootAudioSource;
+    public AudioSource pickUpSound;
     #endregion
 
     private void Start()
@@ -99,9 +102,7 @@ public class PlayerBehavior : MonoBehaviour
             jump = false;
         }
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        
         Camera.main.transform.Rotate(Vector3.right * -Input.GetAxis("Mouse Y") * cameraSpeed);
-        //yaw = (yaw + Input.GetAxis("Mouse X") * sens) % 360f;
     }
 
     private void LateUpdate()
@@ -111,10 +112,8 @@ public class PlayerBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //rigibody.rotation = Quaternion.Euler(new Vector3(0f, yaw, 0f));
         Vector3 movement = transform.forward * moveDirection.z * currentSpeed + transform.right * moveDirection.x * currentSpeed;
         rigibody.velocity = new Vector3(movement.x, rigibody.velocity.y, movement.z);
-        //rigibody.MoveRotation()
     }
 
     private void ShootArrow()
@@ -153,6 +152,6 @@ public class PlayerBehavior : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log("DEAD");
+        GPCtrl.Instance.GameOver();
     }
 }

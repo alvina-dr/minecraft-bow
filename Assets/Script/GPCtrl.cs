@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GPCtrl : MonoBehaviour
 {
@@ -46,8 +47,21 @@ public class GPCtrl : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        pause = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        UICtrl.gameOverMenu.SetActive(true);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

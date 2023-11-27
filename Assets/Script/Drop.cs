@@ -25,6 +25,8 @@ public class Drop : MonoBehaviour
         if (_player != null)
         {
             _player.inventory.AddItem(itemData, num);
+            _player.pickUpSound.Play();
+            lootObject.transform.DOKill();
             Destroy(this.gameObject);
         }
     }

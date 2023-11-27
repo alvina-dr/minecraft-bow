@@ -42,7 +42,7 @@ public class Arrow : MonoBehaviour
     {
         if (isFlying)
         {
-            transform.rotation = Quaternion.LookRotation(rb.velocity);
+            if (rb.velocity != Vector3.zero) transform.rotation = Quaternion.LookRotation(rb.velocity);
         }
     }
 }

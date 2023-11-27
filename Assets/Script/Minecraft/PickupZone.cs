@@ -11,6 +11,7 @@ public class PickupZone : MonoBehaviour
         if (_player != null)
         {
             _player.inventory.AddItem(data, 1);
+            _player.pickUpSound.Play();
             Destroy(transform.parent.gameObject);
         }
     }
