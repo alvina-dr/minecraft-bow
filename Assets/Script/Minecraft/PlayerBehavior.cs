@@ -22,8 +22,6 @@ public class PlayerBehavior : MonoBehaviour
     public float jumpForce;
     public bool jump = false;
     private Vector3 moveDirection;
-    private float yaw;
-    public float sens;
 
     [Header("SHOOTING SYSTEM")]
     public Arrow arrowPrefab;
@@ -104,10 +102,6 @@ public class PlayerBehavior : MonoBehaviour
         }
         moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         Camera.main.transform.Rotate(Vector3.right * -Input.GetAxis("Mouse Y") * cameraSpeed);
-    }
-
-    private void LateUpdate()
-    {
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, Camera.main.transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
