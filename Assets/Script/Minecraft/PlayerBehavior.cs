@@ -45,6 +45,7 @@ public class PlayerBehavior : MonoBehaviour
 
     [Header("AUDIO COMPONENTS")]
     [SerializeField] private AudioSource shootAudioSource;
+    [SerializeField] private AudioSource hitAudioSource;
     public AudioSource pickUpSound;
     #endregion
 
@@ -144,6 +145,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         currentHealth -= _damage;
         GPCtrl.Instance.UICtrl.healthBar.SetBarValue(currentHealth, maxHealth);
+        hitAudioSource.Play();
         if (currentHealth <= 0)
         {
             Death();

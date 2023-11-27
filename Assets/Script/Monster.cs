@@ -31,6 +31,15 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
+        if (GPCtrl.Instance.pause)
+        {
+            agent.speed = 0;
+            animator.SetBool("IsAttacking", false);
+            return;
+        } else
+        {
+            agent.speed = data.moveSpeed;
+        }
         if (agent.enabled) agent.destination = GPCtrl.Instance.player.transform.position;
         if (Vector3.Distance(agent.destination, transform.position) <= data.attackRange)
         {
@@ -46,7 +55,10 @@ public class Monster : MonoBehaviour
     {
         animator.SetBool("IsAttacking", true);
         attackTimer = 0;
-        GPCtrl.Instance.player.Damage(data.damage);
+        DOVirtual.DelayedCall(animator.GetCurrentAnimatorStateInfo(0).length/2, () =>
+        {
+            GPCtrl.Instance.player.Damage(data.damage);
+        });
     }
 
     public void Damage(float _damage, Vector3 _pushDirection)
