@@ -4,7 +4,6 @@
 
 Small project made in class alone. It's a reproduction of the archery system in Minecraft. Defend yourself and try to resist waves of zombies to make the most points !
 
-[![UNITY #1 - Minecraft shooting system](https://img.youtube.com/vi/x5EhAOf1fvQ/0.jpg)](https://www.youtube.com/watch?v=x5EhAOf1fvQ&t=38s "UNITY #1 - Minecraft shooting system
-")
+https://github.com/user-attachments/assets/280a7c03-55f6-4727-bbf9-138aa37d1b1c 
 
 [**UNITY #1 - Minecraft shooting system**](https://www.youtube.com/watch?v=x5EhAOf1fvQ&t=38s)
