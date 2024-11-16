@@ -7,4 +7,4 @@ Small project made in class alone. It's a reproduction of the archery system in 
 [![UNITY #1 - Minecraft shooting system](https://img.youtube.com/vi/x5EhAOf1fvQ/0.jpg)](https://www.youtube.com/watch?v=x5EhAOf1fvQ&t=38s "UNITY #1 - Minecraft shooting system
 ")
 
-**UNITY #1 - Minecraft shooting system**
+[**UNITY #1 - Minecraft shooting system**](https://www.youtube.com/watch?v=x5EhAOf1fvQ&t=38s)
